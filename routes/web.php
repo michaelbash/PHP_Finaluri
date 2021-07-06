@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +14,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
+Route::get('/email', function () {
+    Mail::to('mikheil.basheleishvili.1@btu.edu.ge')->send(new WelcomeMail());
+
+
+    return new WelcomeMail();
+});
+
+
+
+
 
 Route::middleware("deny.auth")->group(function () {
     Route::get('/login', [\App\Http\Controllers\AuthController::class, 'getLogin'])->name('login');
